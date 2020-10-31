@@ -19,7 +19,7 @@ android:
     #BuildTools Version
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     
-    - androi-$ANDROID_API_LEVEL
+    - android-$ANDROID_API_LEVEL
     - android-$ANDROID_EMU_API_LEVEL
 
     # Additional components
@@ -28,13 +28,7 @@ android:
     - extra-android-m2repository
     - extra-android-support
     
-    #Additional components
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - extra-android-support
-    
-    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
+    - sys-img-$ANDROID_API-google_apis-$ANDROID_EMU_API_LEVEL
 
   licenses:
       - 'android-sdk-preview-license-52d11cd2'
@@ -47,10 +41,8 @@ before_install:
 
 before_script:
   - chmod +x gradlew
-  
-  #Emulator instance
   - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
-  - emulator -avd test -no-window & #android-wait-for-emulator
+  - emulator -avd test -no-window & 
   - android-wait-for-emulator
   - abd shell input keyevent 82 &
 
